@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lte IE 8]>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1"><![endif]-->
+    <meta name="renderer" content="webkit">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="keywords" content="网页关键词 必填">
+    <meta name="description" content="网页描述 必填">
+    <meta itemprop="name" content="QQ分享标题 必填">
+    <meta itemprop="image" content="QQ分享图片链接 可选（不填则删除）">
+    <meta name="description" itemprop="description" content="QQ分享描述 必填">
+    <meta name="viewport" content="width=1200">
+    <link rel="icon" href="favicon.ico">
+    <title>miniRouter</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/js/vendor.js"></script>
+<script src="assets/js/page/miniRouter.js"></script>
+
+<script>
+  var router = new MiniRouter({
+    mount: '#app',
+    routers: {
+      '#/test': function () {
+        return {
+          mount: function () {
+            console.log(121212)
+          },
+
+          render: function (render) {
+
+            render('<p>11111111111</p>')
+          },
+
+          beforeEnter: function (to, from) {
+            // console.log(to, from)
+          },
+
+          destroy: function () {
+            // console.log('test销毁')
+          }
+        }
+      }
+    }
+  })
+
+  router.beforeEach(function (to, from) {
+      console.log(to, from)
+  })
+
+  router.injection('#/test1', function () {
+    return {
+      mount: function () {
+        // console.log(121212)
+      },
+      render: function (next) {
+        next('<p>22222222</p>')
+      },
+
+      destroy: function () {
+        console.log('test1销毁')
+      }
+    }
+  })
+</script>
+</body>
+</html>

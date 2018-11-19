@@ -1,0 +1,19 @@
+/*@import "_mixins/list-group.less";*/
+/**
+ * 附加函数
+ */
+/* Horizontal gradient, from left to right（水平渐变，从左到右） */
+/**
+ * 效果过度
+ * @shadow (property duration timing-function delay)
+ *      property       :规定设置过渡效果的 CSS 属性的名称。
+ *      duration       :规定完成过渡效果需要多少秒或毫秒。
+ *      timing-function:规定速度效果的速度曲线。
+ *      delay          :定义过渡效果何时开始。
+ */
+/**
+ * 占位符placeholder样式设置
+ * @color 字体颜色
+ * @font-size 字体大小
+ * @font-family 字体
+ */

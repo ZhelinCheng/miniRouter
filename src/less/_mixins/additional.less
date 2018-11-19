@@ -1,0 +1,92 @@
+/**
+ * 附加函数
+ */
+
+
+/* Horizontal gradient, from left to right（水平渐变，从左到右） */
+.horizontal(@start-color: rgba(255, 255, 255, .6), @end-color: #fff, @start-percent: 0%, @end-percent: 100%) {
+    background-image: -webkit-gradient(linear, @start-percent top, @end-percent top, from(@start-color), to(@end-color)); /*Safari 4+, Chrome 2+*/ 
+    background-image: -webkit-linear-gradient(left, color-stop(@start-color @start-percent), color-stop(@end-color @end-percent)); /* Safari 5.1+, Chrome 10+*/
+    background-image: -moz-linear-gradient(left, @start-color @start-percent, @end-color @end-percent); /* FF 3.6+*/
+    background-image:  linear-gradient(to right, @start-color @start-percent, @end-color @end-percent); /* Standard, IE10*/
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color),argb(@end-color))); /*IE9 and down*/ 
+}
+
+.box-shadow(@shadow: 5px 5px 5px #888888){
+    -webkit-box-shadow: @shadow;
+       -moz-box-shadow: @shadow;
+            box-shadow: @shadow;
+}
+
+/**
+ * 效果过度
+ * @shadow (property duration timing-function delay)
+ *      property       :规定设置过渡效果的 CSS 属性的名称。
+ *      duration       :规定完成过渡效果需要多少秒或毫秒。
+ *      timing-function:规定速度效果的速度曲线。
+ *      delay          :定义过渡效果何时开始。
+ */
+.transition(@transition: all .2s ease){
+    -webkit-transition: @transition;
+       -moz-transition: @transition;
+         -o-transition: @transition;
+            transition: @transition;
+}
+
+.translate(@x: 0, @y: 0) {
+	-webkit-transform: translate(@x, @y);
+       -moz-transform: translate(@x, @y);
+         -o-transform: translate(@x, @y);
+        -ms-transform: translate(@x, @y);
+            transform: translate(@x, @y);
+}
+
+.hidden-mask(@start-color: rgba(255, 255, 255, .6), @end-color: #fff, @right: 0, @bottom: 0){
+    position: relative;
+    overflow: hidden;
+    .clearfix();
+    &:after{
+        display: inline-block;
+        width: 40px;
+        height: 25px;
+        position: absolute;
+        bottom: @bottom;
+        right: @right;
+        .horizontal(@start-color, @end-color);
+    }
+}
+/**
+ * 占位符placeholder样式设置
+ * @color 字体颜色
+ * @font-size 字体大小
+ * @font-family 字体
+ */
+.placeholder(@color: #999, @font-size: 14px, @font-family: '宋体') {
+    &::-webkit-input-placeholder {
+        font-family: @font-family;
+        font-size: @font-size;
+        color: @color;
+    }
+    &:-moz-placeholder{
+        font-family: @font-family;
+        font-size: @font-size;
+        color: @color;
+    }
+    &::-moz-placeholder{
+        font-family: @font-family;
+        font-size: @font-size;
+        color: @color;
+    }
+    &:-ms-input-placeholder{
+        font-family: @font-family;
+        font-size: @font-size;
+        color: @color;
+    }
+    &:placeholder {
+        font-family: @font-family;
+        font-size: @font-size;
+        color: @color;
+    }
+}
+
