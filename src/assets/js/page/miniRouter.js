@@ -77,23 +77,41 @@
         return {}
       }
 
-      var arr = str.split("?")[1].split("&");
+      var arr = str.split('?')[1].split('&')
 
-      var obj = {};
+      var obj = {}
 
       for (var i in arr) {
-        var item = arr[i].split("=")
-        obj[item[0]] = item[1];
+        var item = arr[i].split('=')
+        obj[item[0]] = item[1]
       }
 
       return obj
+    },
+
+    // 路由处理
+    routerHandle: function (path, router) {
+      if (path && router) {
+        router['path'] = path
+      } else {
+        router = {
+          path: path
+        }
+      }
+
+      return router
     },
 
     // 路由改变
     router: function (hash) {
       this.destroy()
 
-      this.beforeEach(this.routers[hash](), this.routers[this.prevRouterHash] && this.routers[this.prevRouterHash]() )
+      var nowRouter = this.routerHandle(hash, this.routers[hash]())
+      var prevRouter = this.routerHandle(this.prevRouterHash, this.routers[this.prevRouterHash] && this.routers[this.prevRouterHash]())
+
+      // 进入全局路由
+      this.beforeEach(nowRouter, prevRouter)
+
       var currentRouter = this.routers[hash]
 
       if (typeof currentRouter !== 'function') {
@@ -110,7 +128,7 @@
       }
 
       // 进入路由方法
-      currentRouter.beforeEnter && currentRouter.beforeEnter(hash, this.prevRouterHash)
+      currentRouter.beforeEnter && currentRouter.beforeEnter(nowRouter, prevRouter)
 
       // 挂载方法
       currentRouter.mount && currentRouter.mount()
@@ -142,7 +160,6 @@
 
     // 销毁
     destroy: function () {
-      console.log(this.prevRouterHash)
       var prevRouter = this.routers[this.prevRouterHash]
       prevRouter && prevRouter().destroy && prevRouter().destroy()
     },
@@ -159,7 +176,9 @@
 
     // hash处理
     hashHandle: function () {
-      return window.location.hash
+      var hash = window.location.hash
+      hash = /^#\/[a-z0-9]*/.exec(hash)
+      return hash ? hash[0] : ''
     },
 
     // 全局路由守卫

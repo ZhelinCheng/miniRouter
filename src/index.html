@@ -30,7 +30,7 @@
       '#/test': function () {
         return {
           mount: function () {
-            console.log(121212)
+            console.log(this)
           },
 
           render: function (render) {
@@ -39,7 +39,7 @@
           },
 
           beforeEnter: function (to, from) {
-            // console.log(to, from)
+             console.log(to, from)
           },
 
           destroy: function () {
