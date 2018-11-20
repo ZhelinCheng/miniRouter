@@ -134,9 +134,17 @@
       currentRouter.mount && currentRouter.mount()
 
       // 渲染方法
-      currentRouter.render && currentRouter.render(function (renderHtml) {
+      currentRouter.render && currentRouter.render(function (renderHtml, callback) {
         this.mount.innerHTML = renderHtml
         this.routers[hash].htmlCache = this.mount.innerHTML
+
+        // 渲染完成后的钩子
+        if (typeof callback === 'function') {
+          callback()
+        } else {
+          currentRouter.complete && currentRouter.complete()
+        }
+
       }.bind(this))
 
       this.prevRouterHash = this.hashHandle()

@@ -15,7 +15,12 @@ var router = new MiniRouter({
         },
 
         render: function (render) {
+          // render第一个参数是需要渲染的html，第二个是渲染完成后的回调，也可以使用complete钩子。
           render('<p>渲染方法，需要将数据传入返回的render才能渲染</p>')
+        },
+
+        complete: function() {
+          // 渲染完成后的钩子，如果render钩子中的render回调使用了回调，该钩子将不生效
         },
 
         beforeEnter: function (to, from) {
@@ -61,5 +66,6 @@ router.beforeEach(function (to, from) {
 ### 路由钩子
 - mount/init：路由挂载完成过执行
 - render：执行渲染
+- complete：渲染完成后的钩子，如果在render钩子中使用了回调，该钩子将不生效。
 - beforeEnter：路由守卫
 - destroy：销毁钩子
