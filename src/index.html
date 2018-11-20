@@ -20,22 +20,29 @@
 </head>
 <body>
 <div id="app"></div>
+
+<script id="j-index" type="text/x-dot-template">
+<div>Hello {{=it.name}}</div>
+</script>
+
 <script src="assets/js/vendor.js"></script>
+<script src="https://cdn.bootcss.com/dot/1.1.2/doT.min.js"></script>
 <script src="assets/js/page/miniRouter.js"></script>
 
 <script>
   var router = new MiniRouter({
     mount: '#app',
     routers: {
-      '#/test': function () {
+      '#/': function () {
         return {
           mount: function () {
             console.log(this)
           },
 
           render: function (render) {
-
-            render('<p>11111111111</p>')
+            var data = {name: 'MiniRouter'}
+            var template = doT.template(document.getElementById('j-index').innerHTML)
+            render(template(data))
           },
 
           beforeEnter: function (to, from) {
@@ -47,6 +54,9 @@
           }
         }
       }
+    },
+    quit: function (miniRouter) {
+      console.log(miniRouter)
     }
   })
 

@@ -105,19 +105,17 @@
     // 路由改变
     router: function (hash) {
       this.destroy()
-
+      var currentRouter = this.routers[hash]
+      if (typeof currentRouter !== 'function') {
+        this.mount.innerHTML = ''
+        this.opt.quit && this.opt.quit(this)
+        return false
+      }
       var nowRouter = this.routerHandle(hash, this.routers[hash]())
       var prevRouter = this.routerHandle(this.prevRouterHash, this.routers[this.prevRouterHash] && this.routers[this.prevRouterHash]())
 
       // 进入全局路由
       this.beforeEach(nowRouter, prevRouter)
-
-      var currentRouter = this.routers[hash]
-
-      if (typeof currentRouter !== 'function') {
-        this.mount.innerHTML = ''
-        return false
-      }
 
       currentRouter = currentRouter()
 

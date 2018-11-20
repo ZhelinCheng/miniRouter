@@ -59,8 +59,9 @@ router.beforeEach(function (to, from) {
 ```
 
 ### 实例化参数
-- mount：指定挂载DOM的ID
-- routers：指定需要挂载的路由对象，value必须是函数，并return一个对象。
+- mount：{String}指定挂载DOM的ID
+- routers：{Object}指定需要挂载的路由对象，value必须是函数，并return一个对象。
+- quit：{Function}指定退出路由的回调，参数为当前实例
 
 ### 实例方法
 ```
