@@ -52,3 +52,14 @@ router.beforeEach(function (to, from) {
   console.log(to, from)
 })
 ```
+
+### 实例化参数
+- mount：指定挂载DOM的ID
+- routers：指定需要挂载的路由对象，value必须是函数，并return一个对象。
+
+
+### 路由钩子
+- mount/init：路由挂载完成过执行
+- render：执行渲染
+- beforeEnter：路由守卫
+- destroy：销毁钩子
