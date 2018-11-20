@@ -62,6 +62,15 @@ router.beforeEach(function (to, from) {
 - mount：指定挂载DOM的ID
 - routers：指定需要挂载的路由对象，value必须是函数，并return一个对象。
 
+### 实例方法
+```
+// 跳转至指定路由
+router.next('#/next', {
+  data: 1
+})
+```
+- next：跳转至指定路由，第一个参数是路由，第二个参数是query.
+
 
 ### 路由钩子
 - mount/init：路由挂载完成过执行
