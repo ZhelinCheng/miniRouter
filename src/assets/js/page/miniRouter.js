@@ -41,7 +41,6 @@
       : document.getElementById('app')
 
     this.routers = opt.routers || {}
-
     this.init()
   }
 
@@ -73,7 +72,7 @@
     queryDeconstruction: function () {
       var str = window.location.href
 
-      if (!(/\?|\&/g.test(str))) {
+      if (!(/[?|&]/g.test(str))) {
         return {}
       }
 
